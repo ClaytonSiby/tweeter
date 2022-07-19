@@ -1,2 +1,19 @@
-<h1>Tweets#index</h1>
-<p>Find me in app/views/tweets/index.html.erb</p>
+<%= form_with model: @tweet do |f| %>
+  <% if f.object.errors.any?%>
+    <div class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3 mx-3">
+      <h2><%= pluralize(form.object.errors.count, "error")%> prohibited this Tweet from being saved:</h2>
+    
+      <ul>
+        <% f.object.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_area :body, class: "border-b border-t-0 border-x-0 mb-6 pt-6 block w-full border-gray-200 focus:shadow-none focus:outline-none focus:ring-transparent focus:border-gray-300 resize-none min-h-[180px] text-lg", placeholder: "What's on your mind?" %>
+
+  <div class="flex justify-end px-6 -mt-20">
+    <%= f.submit "Tweet", class: "px-6 py-2 bg-sky-400 text-white font-semibold rounded-full text-center cursor-pointer inline-block hover:bg-sky-500 transition ease-in-out duration-300"%>
+  </div>
+<% end %>
